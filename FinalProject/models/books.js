@@ -1,4 +1,4 @@
-// models/players.js
+// models/books.js
 const mongoose = require('mongoose');
 
 const booksSchema = new mongoose.Schema({
