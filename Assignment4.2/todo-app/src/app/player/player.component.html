@@ -1,0 +1,96 @@
+<style>
+    table, th, td {
+  border: 1px solid black;
+}
+</style>
+<h2>Add your team Players here !!!</h2>
+
+<form (submit)="addPlayer()">
+  <input type="text" placeholder="Player Name" [(ngModel)]="newPlayer.name" name="name" required>
+  <input type="number" placeholder="Rushing Yards" [(ngModel)]="newPlayer.rushing_yards" name="rushing_yards" required>
+  <input type="number" placeholder="Touchdowns Thrown" [(ngModel)]="newPlayer.touchdowns_thrown" name="touchdowns_thrown" required>
+  <input type="number" placeholder="Sacks" [(ngModel)]="newPlayer.sacks" name="sacks" required> 
+  <input type="number" placeholder="Field Goals" [(ngModel)]="newPlayer.field_goals" name="field_goals" required>
+  <input type="number" placeholder="Missed Goals" [(ngModel)]="newPlayer.missed_goals" name="missed_goals" required>
+  <input type="number" placeholder="Catches" [(ngModel)]="newPlayer.catches" name="catches" required>
+  <button type="submit">Add Player</button>
+  <button type="button" (click)="updatePlayer()">Update</button>
+</form>
+
+<div style="padding-top: 50px;">
+    <table style="margin-left: auto; margin-right: auto;" >
+        <tr>
+          <th>Player Name</th>
+          <th>Rushing Yards</th>
+          <th>Touchdowns Thrown</th>
+          <th>Sacks</th>
+          <th>Field Goals</th>
+          <th>Missed Goals</th>
+          <th>Catches</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        <tr *ngFor="let player of players">
+          <td>{{ player.name }}</td>
+          <td>{{ player.rushing_yards }}</td>
+          <td>{{ player.touchdowns_thrown }}</td>
+          <td>{{ player.sacks }}</td>
+          <td>{{ player.field_goals }}</td>
+          <td>{{ player.missed_goals }}</td>
+          <td>{{ player.catches }}</td>
+          <td><button (click)="editPlayer(player)">Edit</button></td>
+          <td><button (click)="deletePlayer(player._id)">Delete</button></td>
+        </tr>
+      </table>
+</div>
+
+
+<div *ngIf="maxGoalsPlayer">
+    <h3>{{ maxGoalsPlayer.name }} has maximum number of feild goals: {{ maxGoalsPlayer.field_goals }} </h3>
+</div>
+
+<div *ngIf="minGoalsPlayer">
+    <h3>{{ minGoalsPlayer.name }} has least number of feild goals: {{ minGoalsPlayer.field_goals }} </h3>
+</div>
+
+<div *ngIf="maxTouchdownThrowsPlayer">
+    <h3>{{ maxTouchdownThrowsPlayer.name }} has maximum number of touchdowns thrown: {{ maxTouchdownThrowsPlayer.touchdowns_thrown }} </h3>
+</div>
+
+<div *ngIf="maxRushingYardsPlayer">
+    <h3>{{ maxRushingYardsPlayer.name }} has maximum number of rushing yards: {{ maxRushingYardsPlayer.rushing_yards }} </h3>
+</div>
+
+<div *ngIf="minRushingYardsPlayer">
+    <h3>{{ minRushingYardsPlayer.name }} has least number of rushing yards: {{ minRushingYardsPlayer.rushing_yards }} </h3>
+</div>
+
+<div *ngIf="maxSacksPlayer">
+    <h3>{{ maxSacksPlayer.name }} has maximum number of sacks: {{ maxSacksPlayer.sacks }} </h3>
+</div>
+
+<div style="padding-top:5px;">
+    <h3> Player stats sorted based on number of goals scored:</h3>
+    (Refresh page to view results)
+  <table style="margin-left: auto; margin-right: auto;" >
+      <tr>
+        <th>Player Name</th>
+        <th>Rushing Yards</th>
+        <th>Touchdowns Thrown</th>
+        <th>Sacks</th>
+        <th>Field Goals</th>
+        <th>Missed Goals</th>
+        <th>Catches</th>
+      </tr>
+      <tr *ngFor="let player of sortedPlayers">
+        <td>{{ player.name }}</td>
+        <td>{{ player.rushing_yards }}</td>
+        <td>{{ player.touchdowns_thrown }}</td>
+        <td>{{ player.sacks }}</td>
+        <td>{{ player.field_goals }}</td>
+        <td>{{ player.missed_goals }}</td>
+        <td>{{ player.catches }}</td>
+      </tr>
+    </table>
+</div>
+
