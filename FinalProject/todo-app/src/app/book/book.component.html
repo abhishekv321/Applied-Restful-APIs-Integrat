@@ -1,0 +1,82 @@
+<style>
+    table, th, td {
+  border: 1px solid black;
+}
+</style>
+<h2>Add your Books here !!!</h2>
+
+<form (submit)="addBook()">
+  <input type="text" placeholder="Book Name" [(ngModel)]="newBook.name" name="name" required>
+  <input type="text" placeholder="Author Name" [(ngModel)]="newBook.author" name="author" required>
+  <input type="number" placeholder="Release Year" [(ngModel)]="newBook.release_year" name="release_year" required>
+  <input type="number" placeholder="Rating" [(ngModel)]="newBook.rating" name="rating" required> 
+  <button type="submit">Add Book</button>
+  <button type="button" (click)="updateBook()">Update</button>
+</form>
+
+<div style="padding-top: 50px;">
+    <table style="margin-left: auto; margin-right: auto;" >
+        <tr>
+          <th>Book Name</th>
+          <th>Author Name</th>
+          <th>Release Year</th>
+          <th>Rating</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+        <tr *ngFor="let book of books">
+          <td>{{ book.name }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.release_year }}</td>
+          <td>{{ book.rating }}</td>
+          <td><button (click)="editBook(book)">Edit</button></td>
+          <td><button (click)="deleteBook(book._id)">Delete</button></td>
+        </tr>
+      </table>
+</div>
+
+<div *ngIf="maxRatingBook">
+    <h3>"{{ maxRatingBook.name }}" book by "{{ maxRatingBook.author }}" has the highest rating of : {{ maxRatingBook.rating }}</h3>
+</div>
+
+<div style="padding-top:5px;">
+    <h3> Books details sorted based on rating:</h3>
+    (Refresh page to view results)
+  <table style="margin-left: auto; margin-right: auto;" >
+      <tr>
+        <th>Book Name</th>
+        <th>Author Name</th>
+        <th>Release Year</th>
+        <th>Rating</th>
+      </tr>
+      <tr *ngFor="let book of sortedBooks">
+        <td>{{ book.name }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.release_year }}</td>
+        <td>{{ book.rating }}</td>
+      </tr>
+    </table>
+</div>
+
+<!-- Display books by author -->
+<div style="padding-top: 50px;">
+  <h3>Books by Author</h3>
+  <input type="text" placeholder="Author Name" [(ngModel)]="authorName" name="authorName">
+  <button (click)="getBooksByAuthor()">Get Books</button>
+
+  <table style="margin-left: auto; margin-right: auto;">
+    <tr>
+      <th>Book Name</th>
+      <th>Author Name</th>
+      <th>Release Year</th>
+      <th>Rating</th>
+    </tr>
+    <tr *ngFor="let book of booksByAuthor">
+      <td>{{ book.name }}</td>
+      <td>{{ book.author }}</td>
+      <td>{{ book.release_year }}</td>
+      <td>{{ book.rating }}</td>
+    </tr>
+  </table>
+</div>
+
